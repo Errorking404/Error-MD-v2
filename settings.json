@@ -1,0 +1,325 @@
+{
+  "ownerNumber": "404",
+  "botName": "Error-MD",
+  "version": "2.2.0",
+  "fakeVCard": {
+    "displayName": "Error-MD",
+    "vcard": "BEGIN:VCARD\nVERSION:3.0\nN:Error-MD;;;\nFN:Error-MD\nORG:Error-MD\nPHOTO;VALUE=URL:icon.png\nTEL;type=CELL;type=VOICE;waid=404:+404\nEND:VCARD"
+  },
+  "defaultGroupSettings": {
+    "welcome": true,
+    "antilink": false,
+    "antisticker": false,
+    "antiaudio": false,
+    "antivideo": false,
+    "antifile": false,
+    "muted": false
+  },
+  "mode": "public",
+  "channelJid": "0029VbCMYRsF6sn4qsAdwS2v@newsletter",
+  "channelName": "Error MD Updates",
+  "commands": [
+    {
+      "name": "alive",
+      "response": "built-in"
+    },
+    {
+      "name": "ping",
+      "response": "built-in"
+    },
+    {
+      "name": "menu",
+      "response": "built-in"
+    },
+    {
+      "name": "help",
+      "response": "built-in"
+    },
+    {
+      "name": "info",
+      "response": "built-in"
+    },
+    {
+      "name": "stats",
+      "response": "built-in"
+    },
+    {
+      "name": "about",
+      "response": "built-in"
+    },
+    {
+      "name": "runtime",
+      "response": "built-in"
+    },
+    {
+      "name": "id",
+      "response": "built-in"
+    },
+    {
+      "name": "owner",
+      "response": "built-in"
+    },
+    {
+      "name": "version",
+      "response": "built-in"
+    },
+    {
+      "name": "tagall",
+      "response": "built-in"
+    },
+    {
+      "name": "hidetag",
+      "response": "built-in"
+    },
+    {
+      "name": "mute",
+      "response": "built-in"
+    },
+    {
+      "name": "unmute",
+      "response": "built-in"
+    },
+    {
+      "name": "promote",
+      "response": "built-in"
+    },
+    {
+      "name": "demote",
+      "response": "built-in"
+    },
+    {
+      "name": "kick",
+      "response": "built-in"
+    },
+    {
+      "name": "welcome",
+      "response": "built-in"
+    },
+    {
+      "name": "antilink",
+      "response": "built-in"
+    },
+    {
+      "name": "antisticker",
+      "response": "built-in"
+    },
+    {
+      "name": "antiaudio",
+      "response": "built-in"
+    },
+    {
+      "name": "antivideo",
+      "response": "built-in"
+    },
+    {
+      "name": "antifile",
+      "response": "built-in"
+    },
+    {
+      "name": "warn",
+      "response": "built-in"
+    },
+    {
+      "name": "warnings",
+      "response": "built-in"
+    },
+    {
+      "name": "resetwarn",
+      "response": "built-in"
+    },
+    {
+      "name": "link",
+      "response": "built-in"
+    },
+    {
+      "name": "revoke",
+      "response": "built-in"
+    },
+    {
+      "name": "owner",
+      "response": "Errorking404"
+    },
+
+    {
+      "name": "setdesc",
+      "response": "built-in"
+    },
+    {
+      "name": "setpp",
+      "response": "built-in"
+    },
+    {
+      "name": "admins",
+      "response": "built-in"
+    },
+    {
+      "name": "mode",
+      "response": "built-in"
+    },
+    {
+      "name": "tools",
+      "response": "built-in"
+    },
+    {
+      "name": "calc",
+      "response": "built-in"
+    },
+    {
+      "name": "reverse",
+      "response": "built-in"
+    },
+    {
+      "name": "upper",
+      "response": "built-in"
+    },
+    {
+      "name": "lower",
+      "response": "built-in"
+    },
+    {
+      "name": "capitalize",
+      "response": "built-in"
+    },
+    {
+      "name": "count",
+      "response": "built-in"
+    },
+    {
+      "name": "password",
+      "response": "built-in"
+    },
+    {
+      "name": "random",
+      "response": "built-in"
+    },
+    {
+      "name": "encode",
+      "response": "built-in"
+    },
+    {
+      "name": "decode",
+      "response": "built-in"
+    },
+    {
+      "name": "qr",
+      "response": "built-in"
+    },
+    {
+      "name": "shorten",
+      "response": "built-in"
+    },
+    {
+      "name": "weather",
+      "response": "built-in"
+    },
+    {
+      "name": "currency",
+      "response": "built-in"
+    },
+    {
+      "name": "user",
+      "response": "built-in"
+    },
+    {
+      "name": "repeat",
+      "response": "built-in"
+    },
+    {
+      "name": "vv",
+      "response": "built-in"
+    },
+    {
+      "name": "vv2",
+      "response": "built-in"
+    },
+    {
+      "name": "getpp",
+      "response": "built-in"
+    },
+    {
+      "name": "fun",
+      "response": "built-in"
+    },
+    {
+      "name": "wiki",
+      "response": "built-in"
+    },
+    {
+      "name": "quote",
+      "response": "built-in"
+    },
+    {
+      "name": "fact",
+      "response": "built-in"
+    },
+    {
+      "name": "joke",
+      "response": "built-in"
+    },
+    {
+      "name": "meme",
+      "response": "built-in"
+    },
+    {
+      "name": "translate",
+      "response": "built-in"
+    },
+    {
+      "name": "truth",
+      "response": "built-in"
+    },
+    {
+      "name": "dare",
+      "response": "built-in"
+    },
+    {
+      "name": "riddle",
+      "response": "built-in"
+    },
+    {
+      "name": "advice",
+      "response": "built-in"
+    },
+    {
+      "name": "cat",
+      "response": "built-in"
+    },
+    {
+      "name": "dog",
+      "response": "built-in"
+    },
+    {
+      "name": "image",
+      "response": "built-in"
+    },
+    {
+      "name": "wallpaper",
+      "response": "built-in"
+    },
+    {
+      "name": "lyrics",
+      "response": "built-in"
+    },
+    {
+      "name": "movie",
+      "response": "built-in"
+    },
+    {
+      "name": "anime",
+      "response": "built-in"
+    },
+    {
+      "name": "worm",
+      "response": "built-in"
+    },
+    {
+      "name": "data",
+      "response": "built-in"
+    },
+    {
+      "name": "groq",
+      "response": "built-in"
+    }
+  ],
+  "prefix": "."
+}
