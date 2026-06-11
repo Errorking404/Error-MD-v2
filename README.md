@@ -79,7 +79,7 @@ If you prefer to host it yourself:
 
 | Category | Example Commands | Description |
 | :--- | :--- | :--- |
-| **AI** | `.groq <prompt>`, `.ai` | Chat with Llama 3.1 |
+| **AI** | `.groq <prompt>`, `.worm <model> <prompt>` | Chat with Llama 3.1 and wormgpt |
 | **Download** | `.song <query>`, `.video`, `.tiktok`, `.insta`, `.fb` | Media from YT, TT, IG, FB |
 | **Admin** | `.kick`, `.promote`, `.mute`, `.tagall` | Group management |
 | **Security** | `.antilink on`, `.antibadword on` | Auto-moderation |
