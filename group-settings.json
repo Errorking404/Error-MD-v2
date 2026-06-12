@@ -97,5 +97,14 @@
     "antivideo": false,
     "antifile": false,
     "muted": false
+  },
+  "120363322904087310@g.us": {
+    "welcome": true,
+    "antilink": false,
+    "antisticker": false,
+    "antiaudio": false,
+    "antivideo": false,
+    "antifile": false,
+    "muted": false
   }
 }
