@@ -1,9 +1,14 @@
- 1. Update everything:
+# 1. Update everything:
+
       pkg update && pkg upgrade
    2. Install the required tools for your specific dependencies:
-       * For fluent-ffmpeg → pkg install ffmpeg
-       * For sharp → pkg install libvips
-       * For node-tesseract-ocr → pkg install tesseract
-       * For general build tools → pkg install build-essential python
+       ** For fluent-ffmpeg → 
+     pkg install ffmpeg
+       ** For sharp → 
+     pkg install libvips
+       * For node-tesseract-ocr → 
+     pkg install tesseract
+       * For general build tools → 
+     pkg install build-essential python
 	
 

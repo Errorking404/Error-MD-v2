@@ -16,6 +16,8 @@ function loadUserGroupData() {
                 warnings: {},
                 sudo: []
             };
+      
+            fs.mkdirSync(path.dirname(filePath), { recursive: true })
             fs.writeFileSync(dataPath, JSON.stringify(defaultData, null, 2));
             return defaultData;
         }
