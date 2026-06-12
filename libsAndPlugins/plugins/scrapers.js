@@ -148,20 +148,33 @@ Asena.addCommand(
           quoted: message.data,
         })
       await message.sendMessage(Lang.DOWNLOADING_VIDEO)
-      let yt = ytdl(arama.videoId, {
-        filter: (format) =>
-          format.container === "mp4" &&
-          ["720p", "480p", "360p", "240p", "144p"].map(() => true),
-      })
-      yt.pipe(fs.createWriteStream("./" + arama.videoId + ".mp4"))
-      yt.on("end", async () => {
-        return await message.sendMessage(
-          fs.readFileSync("./" + arama.videoId + ".mp4"),
-          { mimetype: "video/mp4", quoted: message.quoted },
-          video
-        )
-      })
-    } catch {
+      
+      const ytdlCore = require("@distube/ytdl-core");
+      const videoId = vid[1];
+      const fileName = `./${videoId}.mp4`;
+      
+      await new Promise((resolve, reject) => {
+        const stream = ytdlCore(videoId, {
+          filter: (format) =>
+            format.container === "mp4" &&
+            ["720p", "480p", "360p", "240p", "144p"].map(() => true),
+        });
+        const writeStream = fs.createWriteStream(fileName);
+        stream.pipe(writeStream);
+        writeStream.on("finish", resolve);
+        writeStream.on("error", reject);
+        stream.on("error", reject);
+      });
+
+      return await message.sendMessage(
+        fs.readFileSync(fileName),
+        { mimetype: "video/mp4", quoted: message.quoted },
+        video
+      ).then(async () => {
+        if (fs.existsSync(fileName)) fs.unlinkSync(fileName);
+      });
+    } catch (e) {
+      console.error(e);
       return await message.sendMessage(Lang.NO_RESULT)
     }
   }

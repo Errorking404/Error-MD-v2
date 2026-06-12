@@ -48,10 +48,10 @@
     "simple-git": "^3.25.0",
     "steno": "^1.0.0",
     "translatte": "^3.0.1",
+    "undici": "5.28.4",
     "wikijs": "^6.4.1",
     "youtube-yts": "^2.0.0",
-    "yt-search": "^2.12.1",
-    "ytdl-core": "^4.11.5"
+    "yt-search": "^2.12.1"
   },
   "engines": {
     "node": ">=20"

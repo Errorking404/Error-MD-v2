@@ -1,8 +1,8 @@
 const Asena = require("../Utilis/events")
-const { getBuffer, igStory, downVideo } = require("../Utilis/download")
-const { instagram } = require("../Utilis/Misc")
+const { getBuffer, igStory, downVideo, instagram } = require("../Utilis/download")
 const Language = require("../language")
 const Lang = Language.getString("insta")
+
 Asena.addCommand(
   {
     pattern: "insta ?(.*)",
@@ -15,22 +15,28 @@ Asena.addCommand(
       return await message.sendMessage(Lang.NEED_REPLY)
     await message.sendMessage(Lang.DOWNLOADING)
     const urls = await instagram(match)
-    if (!urls) return await message.sendMessage(Lang.NOT_FOUND)
+    if (!urls || urls.length === 0) return await message.sendMessage(Lang.NOT_FOUND)
     for (const url of urls) {
-      const { buffer, type } = await getBuffer(url)
-      if (!buffer) await message.sendMessage(url)
-      else if (type == "image")
-        await message.sendMessage(
-          buffer,
-          { mimetype: "image/jpeg", quoted: message.quoted },
-          image
-        )
-      else
+      const { buffer } = await getBuffer(url)
+      if (!buffer) {
+        await message.sendMessage(url)
+        continue
+      }
+      // Simple type detection based on URL or buffer content
+      const isVideo = url.includes(".mp4") || url.includes("video");
+      if (isVideo) {
         await message.sendMessage(
           buffer,
           { mimetype: "video/mp4", quoted: message.quoted },
           video
         )
+      } else {
+        await message.sendMessage(
+          buffer,
+          { mimetype: "image/jpeg", quoted: message.quoted },
+          image
+        )
+      }
     }
   }
 )
@@ -53,19 +59,22 @@ Asena.addCommand(
     if (!json) return await message.sendMessage("*Not found!*")
     await message.sendMessage(Lang.DOWNLOADING_STORY.format(json.length))
     for (const url of json) {
-      const { buffer, type } = await getBuffer(url)
-      if (type == "video")
+      const { buffer } = await getBuffer(url)
+      if (!buffer) continue;
+      const isVideo = url.includes(".mp4") || url.includes("video");
+      if (isVideo) {
         await message.sendMessage(
           buffer,
           { mimetype: "video/mp4", quoted: message.quoted },
           video
         )
-      else if (type == "image")
+      } else {
         await message.sendMessage(
           buffer,
           { mimetype: "image/jpeg", quoted: message.quoted },
           image
         )
+      }
     }
   }
 )
@@ -81,9 +90,10 @@ Asena.addCommand(
     if (match === "") return await message.sendMessage(Lang.NEED_REPLY)
     await message.sendMessage(Lang.DOWNLOADING)
     let links = await downVideo(match)
-    if (links.length == 0) return await message.sendMessage(Lang.NOT_FOUND)
+    if (!links || links.length == 0) return await message.sendMessage(Lang.NOT_FOUND)
     let { buffer, size } = await getBuffer(links[0])
-    if (size > 100)
+    if (!buffer) return await message.sendMessage(Lang.NOT_FOUND)
+    if (size > 100 * 1024 * 1024) // 100MB limit
       return await message.sendMessage(
         Lang.SIZE.format(size, links[0], links[1])
       )

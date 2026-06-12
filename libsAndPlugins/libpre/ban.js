@@ -67,13 +67,16 @@ const unbanUser = async (m, ErrorMD) => {
 
 // Function to Auto-Delete Messages of Banned Users
 const checkBannedUsers = async (m, ErrorMD) => {
-    if (!m.isGroup) return;
+    const jid = m.key?.remoteJid;
+    if (!jid || !jid.endsWith('@g.us')) return;
+    
     const banList = loadBanList();
-    const senderNumber = m.sender.split('@')[0];
+    const sender = m.key.participant || jid;
+    const senderNumber = sender.split('@')[0];
 
     if (banList[senderNumber]) {
         console.log(`🚫 Deleting message from banned user @${senderNumber}`);
-        await ErrorMD.sendMessage(m.chat, { delete: m.key });
+        await ErrorMD.sendMessage(jid, { delete: m.key });
     }
 };
 

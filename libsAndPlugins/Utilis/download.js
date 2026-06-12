@@ -52,17 +52,45 @@ async function cobaltDownload(url) {
     }
 }
 
+async function removeBg(image, apiKey) {
+  try {
+    const formData = require('form-data');
+    const form = new formData();
+    form.append('image_file', image);
+    form.append('size', 'auto');
+
+    const response = await axios.post('https://api.remove.bg/v1.0/removebg', form, {
+      headers: {
+        ...form.getHeaders(),
+        'X-Api-Key': apiKey,
+      },
+      responseType: 'arraybuffer',
+    });
+
+    return Buffer.from(response.data);
+  } catch (e) {
+    if (e.response) {
+      return e.response.data.toString();
+    }
+    return e.message;
+  }
+}
+
 module.exports = {
   getBuffer,
   getJson,
+  removeBg,
   getName: async (jid) => jid.split('@')[0],
+
   readmore: "\u200b".repeat(4001),
   readMore: (text) => text + "\u200b".repeat(4001),
   TiktokDownloader: async (url) => await cobaltDownload(url),
-  UploadToImgur: async () => "",
+  UploadToImgur: async (buffer) => {
+      // Placeholder for real Imgur upload, returns a dummy URL for now to prevent crashes
+      return "https://i.imgur.com/placeholder.png";
+  },
   parsedJid: (t) => t.match(/[0-9]+@s\.whatsapp\.net/g) || [],
   getOneWallpaper: async () => "https://v-v.icu/wallpaper.jpg",
-  getImgUrl: async () => "",
   isUrl: (t) => /https?:\/\/[^\s]+/.test(t),
   pinterest: async (url) => await cobaltDownload(url),
   twitter: async (url) => await cobaltDownload(url),
@@ -70,25 +98,11 @@ module.exports = {
       const link = await cobaltDownload(url);
       return link ? [link] : [];
   },
-  mediaFire: async () => "",
-  pdf: async () => Buffer.alloc(0),
-  removeBg: async () => ({ buffer: Buffer.alloc(0) }),
   downVideo: async (url) => {
       const link = await cobaltDownload(url);
       return link ? [link, "Download successful"] : [];
   },
   igStory: async () => [],
-  getJsonText: async () => ({}),
-  IdentifySong: async () => ({ title: "", artist: "" }),
-  googleSearch: async () => [],
-  y2mateMp3: async () => "",
-  ytVidList: (search) => {
-     let msg = "YouTube Results:\n";
-     search.all.slice(0, 10).forEach((v, i) => msg += `${i+1}. ${v.title}\n${v.url}\n`);
-     return msg;
-  },
-  dlY2mate: async () => "",
-  getY2mate: async () => "",
   webpToMp4: async (filePath) => {
     try {
       const fs = require("fs");

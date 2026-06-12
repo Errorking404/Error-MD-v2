@@ -275,8 +275,10 @@ async function startWhatsApp(sessionId, phoneForPair = null) {
                         // --- Automatic Group Monitoring ---
                         const { Antilink } = require("./libsAndPlugins/lib/antilink");
                         const { handleBadwordDetection } = require("./libsAndPlugins/lib/antibadword");
+                        const { checkBannedUsers } = require("./libsAndPlugins/libpre/ban");
                         
                         await Antilink(msg, sock);
+                        await checkBannedUsers(msg, sock);
                         
                         const userMessage = msg.message?.conversation || 
                                           msg.message?.extendedTextMessage?.text || '';
@@ -542,6 +544,30 @@ async function loadSessions() {
                     }
                 } catch (e) {
                     console.error(chalk.yellow(`⚠️ Could not read creds for ${dir}: ${e.message}`));
+                }
+            }
+        }
+    }
+}
+
+setInterval(
+    cleanupOldSessions,
+    1000 * 60 * 60 // Run every hour
+)
+
+app.listen(PORT, "0.0.0.0", () => {
+
+    console.log(
+        `🚀 ${BOT_NAME} RUNNING ON ${PORT}`
+    )
+
+    loadSessions();
+
+    for (const url of getStartupUrls(PORT)) {
+        console.log(`🌐 ${url}`)
+    }
+})
+r(chalk.yellow(`⚠️ Could not read creds for ${dir}: ${e.message}`));
                 }
             }
         }
