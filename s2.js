@@ -528,6 +528,49 @@ async function loadSessions() {
     if (!fs.existsSync(SESSION_DIR)) return;
     const dirs = fs.readdirSync(SESSION_DIR);
     console.log(chalk.cyan(`📦 Found ${dirs.length} session folders. Resuming registered bots...`));
+
+    for (const dir of dirs) {
+        const fullPath = path.join(SESSION_DIR, dir);
+        if (fs.statSync(fullPath).isDirectory()) {
+            const credsFile = path.join(fullPath, 'creds.json');
+            if (fs.existsSync(credsFile)) {
+                try {
+                    const creds = JSON.parse(fs.readFileSync(credsFile, 'utf-8'));
+                    if (creds.registered) {
+                        console.log(chalk.green(`🔄 Resuming active session: ${dir}`));
+                        startWhatsApp(dir).catch(err => {
+                            console.error(chalk.red(` ❌ Failed to resume session ${dir}: ${err.message}`));
+                        });
+                    }
+                } catch (e) {
+                    console.error(chalk.yellow(`⚠️ Could not read creds for ${dir}: ${e.message}`));
+                }
+            }
+        }
+    }
+}
+
+setInterval(
+    cleanupOldSessions,
+    1000 * 60 * 60 // Run every hour
+)
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(
+        `🚀 ${BOT_NAME} RUNNING ON ${PORT}`
+    )
+    loadSessions();
+    for (const url of getStartupUrls(PORT)) {
+        console.log(`🌐 ${url}`)
+    }
+})
+
+
+/*
+async function loadSessions() {
+    if (!fs.existsSync(SESSION_DIR)) return;
+    const dirs = fs.readdirSync(SESSION_DIR);
+    console.log(chalk.cyan(`📦 Found ${dirs.length} session folders. Resuming registered bots...`));
     
     for (const dir of dirs) {
         const fullPath = path.join(SESSION_DIR, dir);
@@ -568,7 +611,7 @@ app.listen(PORT, "0.0.0.0", () => {
     }
 })
 r(chalk.yellow(`⚠️ Could not read creds for ${dir}: ${e.message}`));
-                }
+                
             }
         }
     }
@@ -591,3 +634,6 @@ app.listen(PORT, "0.0.0.0", () => {
         console.log(`🌐 ${url}`)
     }
 })
+*/
+
+

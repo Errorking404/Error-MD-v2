@@ -81,7 +81,8 @@ const checkBannedUsers = async (m, ErrorMD) => {
 };
 
 // Listen for Ban, Unban & Auto-Delete Messages
-module.exports = (ErrorMD) => {
+
+/*module.exports = (ErrorMD) => {
     ErrorMD.ev.on('messages.upsert', async ({ messages }) => {
         if (!messages || !messages[0]) return;
         const m = messages[0];
@@ -91,3 +92,14 @@ module.exports = (ErrorMD) => {
         await checkBannedUsers(m, ErrorMD);
     });
 };
+*/
+
+// ... keep all the functions above (banUser, unbanUser, checkBannedUsers, loadBanList, saveBanList)
+
+// Export only the functions (no automatic event listener)
+module.exports = {
+    checkBannedUsers,
+    banUser,
+    unbanUser
+};
+ 
